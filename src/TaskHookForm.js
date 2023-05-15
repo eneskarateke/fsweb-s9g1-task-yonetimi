@@ -15,17 +15,20 @@ export default function TaskHookForm({ kisiler, submitFn }) {
     },
   });
 
-  const onSubmit = (data) => {
+  const mySubmit = (data) => {
     const newTask = {
       title: data.title,
       description: data.description,
       people: data.people,
+      id: 323,
+      status: "yapılacak",
+      deadline: "",
     };
     submitFn(newTask);
   };
 
   return (
-    <form className="taskForm" onSubmit={handleSubmit}>
+    <form className="taskForm" onSubmit={handleSubmit(mySubmit)}>
       <div className="form-line">
         <label className="input-label" htmlFor="title">
           Başlık
@@ -73,15 +76,12 @@ export default function TaskHookForm({ kisiler, submitFn }) {
               <input
                 type="checkbox"
                 name="people"
+                value={p}
                 {...register("people", {
-                  required: true,
-                  max: {
-                    value: 3,
-                    message: "En fazla 3 kişi seçebilirsiniz",
-                  },
-                  min: {
-                    value: 1,
-                    message: "Lütfen en az bir kişi seçin",
+                  required: "En az 1 kişi seçmelisiniz.",
+                  validate: {
+                    maksimum: (peopleList) =>
+                      peopleList.length < 4 || "En fazla 3 kişi seçebilirsiniz",
                   },
                 })}
               />
