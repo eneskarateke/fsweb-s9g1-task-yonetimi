@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { nanoid } from "nanoid";
 
 export default function TaskHookForm({ kisiler, submitFn }) {
   const {
@@ -21,7 +22,7 @@ export default function TaskHookForm({ kisiler, submitFn }) {
       title: data.title,
       description: data.description,
       people: data.people,
-      id: 323,
+      id: nanoid(),
       status: "yapılacak",
       deadline: "",
     };
