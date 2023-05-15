@@ -5,14 +5,19 @@ import TaskForm from "./TaskForm";
 import TaskHookForm from "./TaskHookForm";
 import PeopleForm from "./PeopleForm";
 import { initialTasks, initialTeam } from "./data";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 function App() {
+  const tamamlandi = () =>
+    toast("Görev başarıyla tamamlananlar listesine eklendi.");
+  const yapilacaklar = () =>
+    toast("Görev başarıyla yapılacaklar listesine eklendi.");
+
   const [tasks, setTasks] = useState(initialTasks);
   const [team, setTeam] = useState(initialTeam);
 
   function handleTaskSubmit(yeniTask) {
+    yapilacaklar();
     setTasks([yeniTask, ...tasks]);
   }
 
@@ -28,13 +33,9 @@ function App() {
         return task;
       }
     });
+    tamamlandi();
     setTasks(updatedTasks);
   }
-
-  const tamamlandi = () =>
-    toast("Görev başarıyla tamamlananlar listesine eklendi.");
-  const yapilacaklar = () =>
-    toast("Görev başarıyla yapılacaklar listesine eklendi.");
 
   return (
     <div className="app">

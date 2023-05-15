@@ -5,6 +5,7 @@ export default function TaskHookForm({ kisiler, submitFn }) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isValid },
   } = useForm({
     mode: "onChange",
@@ -25,6 +26,7 @@ export default function TaskHookForm({ kisiler, submitFn }) {
       deadline: "",
     };
     submitFn(newTask);
+    reset();
   };
 
   return (
